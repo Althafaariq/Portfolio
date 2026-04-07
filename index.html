@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Althafariq | Portfolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      /* --- CUSTOM SCROLLBAR --- */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(#ffd700, #ffae00);
+        border-radius: 10px;
+        border: 2px solid #050505;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: #050505;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      /* HEADER */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(20px);
+        z-index: 10;
+      }
+
+      header h1 {
+        color: #ffd700;
+      }
+
+      nav a {
+        margin-left: 25px;
+        color: #ccc;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      nav a:hover {
+        color: #ffd700;
+      }
+
+      /* SECTION */
+      section {
+        padding: 120px 20px;
+        max-width: 1100px;
+        margin: auto;
+        text-align: center;
+      }
+
+      /* HERO */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding-top: 200px;
+      }
+
+      .hero-img-wrapper {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow:
+          0 0 40px #ffd700,
+          0 0 80px rgba(255, 215, 0, 0.5);
+        z-index: 1;
+      }
+
+      .hero-img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: url("Me.jpg") center/cover no-repeat;
+        z-index: 2;
+        cursor: pointer;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .hero-img:hover {
+        transform: scale(1.08);
+      }
+
+      .hero h2 {
+        font-size: 48px;
+        background: linear-gradient(90deg, #fff, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .typing {
+        color: #ffd700;
+        font-weight: 600;
+      }
+
+      /* ABOUT ME SECTION */
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 60px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #ffd700;
+      }
+
+      /* MODAL */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .modal-content {
+        background: #111;
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 600px;
+        width: 100%;
+        border: 1px solid #ffd700;
+        position: relative;
+        text-align: left;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #888;
+      }
+
+      .close-modal:hover {
+        color: #ffd700;
+      }
+
+      /* BUTTON */
+      .btn {
+        padding: 14px 30px;
+        background: linear-gradient(135deg, #ffd700, #ffae00);
+        border: none;
+        border-radius: 40px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #000;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      }
+
+      /* CARDS DENGAN EFEK TILT 3D */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+        perspective: 1000px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 35px;
+        border-radius: 20px;
+        /* Transition ditambahkan agar saat mouse keluar, kartu kembali tegak dengan halus */
+        transition:
+          transform 0.2s ease-out,
+          background 0.3s,
+          border-color 0.3s,
+          box-shadow 0.3s;
+        border: 1px solid rgba(255, 215, 0, 0.1);
+        height: 100%;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+      }
+
+      .card:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+      }
+
+      /* Efek Konten Melayang di dalam kartu (Z-axis) */
+      .card h3,
+      .card div,
+      .card p,
+      .card span {
+        transform: translateZ(30px);
+      }
+
+      /* Efek Cahaya Mengalir saat Hover */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 215, 0, 0.1),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .card:hover::before {
+        left: 100%;
+      }
+
+      /* CONTACT */
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        text-decoration: none;
+        margin-bottom: 20px;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+
+      .contact-link i {
+        font-size: 20px;
+        width: 30px;
+        text-align: center;
+      }
+
+      .contact-link:hover {
+        color: #ffd700;
+        transform: translateX(5px);
+      }
+
+      .skill {
+        margin: 20px 0;
+        text-align: left;
+      }
+      .bar {
+        height: 10px;
+        background: #222;
+        border-radius: 10px;
+        margin-top: 8px;
+      }
+      .bar span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #ffd700, #ffae00);
+        border-radius: 10px;
+      }
+
+      .contact {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 40px;
+        text-align: left;
+      }
+      .contact input,
+      .contact textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        background: #111;
+        color: #fff;
+        outline: none;
+        font-size: 14px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px;
+        color: #777;
+        border-top: 1px solid #111;
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 20px;
+        }
+        .contact {
+          grid-template-columns: 1fr;
+        }
+        .hero h2 {
+          font-size: 32px;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Althafariq</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-img-wrapper" data-aos="zoom-in">
+        <div class="hero-glow"></div>
+        <div class="hero-img" onclick="openBio()"></div>
+      </div>
+      <h2 data-aos="fade-up">Hello, saya Althafariq</h2>
+      <p data-aos="fade-up" data-aos-delay="200">
+        Saya adalah <span class="typing"></span>
+      </p>
+      <a href="#projects" class="btn" data-aos="fade-up" data-aos-delay="400"
+        >Explore Projects</a
+      >
+    </section>
+
+    <section id="about" data-aos="fade-up">
+      <h2 style="margin-bottom: 40px">About Me</h2>
+      <div class="about-container">
+        <div>
+          <h3 style="color: #ffd700; margin-bottom: 15px">Siapa Saya?</h3>
+          <p style="color: #ccc; line-height: 1.8; font-size: 17px">
+            Hai, saya Althaf! Siswa di <b>SMP Bina Qurani</b> yang percaya kalau
+            hidup itu harus seimbang antara logika dan aksi. Di depan layar,
+            saya adalah seorang <b>Frontend Developer</b> dan peminat
+            <b>Arduino</b> yang senang membangun proyek digital inovatif.
+          </p>
+          <p
+            style="
+              color: #ccc;
+              line-height: 1.8;
+              font-size: 17px;
+              margin-top: 15px;
+            "
+          >
+            Tapi, saya nggak cuma duduk di depan laptop. Saat waktu luang, kamu
+            bakal nemuin saya di lapangan <b>Futsal</b>—karena buat saya, kerja
+            sama tim dan strategi di lapangan sama serunya dengan menyusun baris
+            kode. Selain olahraga, saya juga aktif berkontribusi di
+            <b>PMR Madya</b> untuk mengasah sisi kepedulian sosial. Saya suka
+            tantangan, senang berkompetisi, dan selalu bersemangat mengubah ide
+            sederhana menjadi karya yang nyata!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 style="margin-bottom: 40px">Featured Projects</h2>
+      <div class="cards">
+        <div
+          class="card"
+          data-aos="fade-up"
+          onclick="
+            openProject(
+              'Jam Digital Masjid',
+              'Sistem Jadwal Sholat Digital berbasis Web yang mengintegrasikan API Real-time untuk akurasi waktu sholat berdasarkan koordinat lokasi. Dikembangkan dengan HTML5, CSS modern, dan JavaScript, proyek ini dirancang untuk memberikan informasi ibadah yang presisi dengan antarmuka yang bersih dan responsif',
+              'https://althafaariq.github.io/Prayer-Times-Althafariq/',
+            )
+          "
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">🕌</div>
+          <h3>Jam Digital Masjid</h3>
+          <p style="color: #888; margin-top: 10px">
+            Sistem waktu sholat otomatis berbasis API & Real-time.
+          </p>
+          <span
+            style="
+              display: inline-block;
+              margin-top: 15px;
+              color: #ffd700;
+              font-size: 14px;
+            "
+            >Detail Selengkapnya →</span
+          >
+        </div>
+
+        <div
+          class="card"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          onclick="
+            openProject(
+              'Web Perpustakaan',
+              'Sistem manajemen buku digital untuk pendataan pinjaman yang responsif. Memudahkan admin dalam melacak status buku dan keanggotaan secara real-time.',
+              '#',
+            )
+          "
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">📚</div>
+          <h3>Web Perpustakaan</h3>
+          <p style="color: #888; margin-top: 10px">
+            Sistem manajemen pendataan pinjaman buku responsif.
+          </p>
+          <span
+            style="
+              display: inline-block;
+              margin-top: 15px;
+              color: #ffd700;
+              font-size: 14px;
+            "
+            >Detail Selengkapnya →</span
+          >
+        </div>
+
+        <div
+          class="card"
+          style="opacity: 0.5"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">🚀</div>
+          <h3>Coming Soon</h3>
+          <p style="color: #888; margin-top: 10px">
+            Proyek keren selanjutnya sedang dalam pengembangan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up">
+      <h2 style="margin-bottom: 40px">Expertise</h2>
+      <div class="skill">
+        <p>HTML</p>
+        <div class="bar"><span style="width: 95%"></span></div>
+      </div>
+      <div class="skill">
+        <p>CSS & Tailwind</p>
+        <div class="bar"><span style="width: 90%"></span></div>
+      </div>
+      <div class="skill">
+        <p>JavaScript</p>
+        <div class="bar"><span style="width: 85%"></span></div>
+      </div>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2 style="margin-bottom: 40px">Get In Touch</h2>
+      <div class="contact">
+        <div class="card" style="text-align: left; height: fit-content">
+          <h3 style="margin-bottom: 25px; color: #ffd700">Mari Terkoneksi</h3>
+          <a href="mailto:althufgaming@gmail.com" class="contact-link"
+            ><i class="fas fa-envelope" style="color: #ffd700"></i>
+            althufgaming@gmail.com</a
+          >
+          <a
+            href="https://instagram.com/althaafariq"
+            target="_blank"
+            class="contact-link"
+            ><i class="fab fa-instagram" style="color: #ffd700"></i>
+            Instagram</a
+          >
+          <a
+            href="https://github.com/althafaariq"
+            target="_blank"
+            class="contact-link"
+            ><i class="fab fa-github" style="color: #ffd700"></i> Github</a
+          >
+          <a
+            href="https://discord.com/users/Althafvvariq"
+            target="_blank"
+            class="contact-link"
+            ><i class="fab fa-discord" style="color: #ffd700"></i> Discord</a
+          >
+          <p
+            style="
+              margin-top: 25px;
+              color: #888;
+              font-size: 14px;
+              line-height: 1.6;
+            "
+          >
+            Siap berkolaborasi untuk proyek keren selanjutnya.
+          </p>
+        </div>
+
+        <div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+            <input type="text" placeholder="Nama Lengkap" />
+            <input type="email" placeholder="Alamat Email" />
+          </div>
+          <input type="text" placeholder="Subjek Pesan" />
+          <textarea rows="5" placeholder="Apa yang bisa saya bantu?"></textarea>
+          <button class="btn" style="width: 100%">
+            KIRIM PESAN
+            <i class="fas fa-paper-plane" style="margin-left: 10px"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="projectModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeProject()">&times;</span>
+        <h2 id="modalTitle" style="color: #ffd700; margin-bottom: 20px">
+          Project Title
+        </h2>
+        <p
+          id="modalDescription"
+          style="color: #ccc; line-height: 1.6; margin-bottom: 30px"
+        >
+          Description goes here.
+        </p>
+        <a id="modalLink" href="#" target="_blank" class="btn"
+          >Kunjungi Website</a
+        >
+      </div>
+    </div>
+
+    <footer>© 2026 Althafariq Portfolio</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Inisialisasi AOS
+      AOS.init({ duration: 1000, once: true });
+
+      // Typing Effect
+      const text = ["Frontend Developer", "Creative Programmer", "UI Designer"];
+      let i = 0,
+        j = 0,
+        isDel = false;
+
+      function type() {
+        let cur = text[i];
+        document.querySelector(".typing").textContent = cur.substring(0, j);
+        if (!isDel && j++ === cur.length) {
+          isDel = true;
+          setTimeout(type, 1500);
+          return;
+        }
+        if (isDel && j-- === 0) {
+          isDel = false;
+          i = (i + 1) % text.length;
+        }
+        setTimeout(type, isDel ? 50 : 100);
+      }
+      type();
+
+      // --- LOGIC GERAK TILT 3D ---
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left; // posisi x di dalam kartu
+          const y = e.clientY - rect.top; // posisi y di dalam kartu
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          // Hitung derajat kemiringan (maksimal 15 derajat)
+          const rotateX = (centerY - y) / 10;
+          const rotateY = (x - centerX) / 10;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+      });
+
+      // Modal Functionality
+      const modal = document.getElementById("projectModal");
+      function openProject(title, desc, link) {
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalDescription").innerText = desc;
+        document.getElementById("modalLink").href = link;
+        if (link === "#") {
+          document.getElementById("modalLink").style.display = "none";
+        } else {
+          document.getElementById("modalLink").style.display = "inline-block";
+        }
+        modal.style.display = "flex";
+      }
+
+      function openBio() {
+        openProject(
+          "Biodata Althafariq",
+          "Halo! Saya Althafariq Mikail Sandika, seorang siswa di SMP Bina Qurani yang aktif dalam organisasi PMR Madya. Selain akademik, saya sangat mendalami dunia pemrograman web dan robotika menggunakan Arduino. Saya senang menciptakan karya digital yang inovatif dan bermanfaat bagi banyak orang.",
+          "#",
+        );
+      }
+
+      function closeProject() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        if (event.target == modal) closeProject();
+      };
+    </script>
+  </body>
+</html>
