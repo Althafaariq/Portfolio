@@ -11,6 +11,12 @@
     />
 
     <link
+      rel="icon"
+      href="https://img.icons8.com/ios-filled/50/c5a059/sports-car.png"
+      type="image/png"
+    />
+
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
@@ -232,7 +238,6 @@
         background: rgba(255, 255, 255, 0.03);
         padding: 35px;
         border-radius: 20px;
-        /* Transition ditambahkan agar saat mouse keluar, kartu kembali tegak dengan halus */
         transition:
           transform 0.2s ease-out,
           background 0.3s,
@@ -252,7 +257,6 @@
         box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
       }
 
-      /* Efek Konten Melayang di dalam kartu (Z-axis) */
       .card h3,
       .card div,
       .card p,
@@ -260,7 +264,6 @@
         transform: translateZ(30px);
       }
 
-      /* Efek Cahaya Mengalir saat Hover */
       .card::before {
         content: "";
         position: absolute;
@@ -430,7 +433,7 @@
           onclick="
             openProject(
               'Jam Digital Masjid',
-              'Sistem Jadwal Sholat Digital berbasis Web yang mengintegrasikan API Real-time untuk akurasi waktu sholat berdasarkan koordinat lokasi. Dikembangkan dengan HTML5, CSS modern, dan JavaScript, proyek ini dirancang untuk memberikan informasi ibadah yang presisi dengan antarmuka yang bersih dan responsif',
+              'Sistem Jadwal Sholat Digital berbasis Web yang mengintegrasikan API Real-time untuk akurasi waktu sholat.',
               'https://althafaariq.github.io/Prayer-Times-Althafariq/',
             )
           "
@@ -446,8 +449,9 @@
               margin-top: 15px;
               color: #ffd700;
               font-size: 14px;
+              font-weight: 600;
             "
-            >Detail Selengkapnya →</span
+            >Kunjungi Website →</span
           >
         </div>
 
@@ -458,7 +462,7 @@
           onclick="
             openProject(
               'Web Perpustakaan',
-              'Sistem manajemen buku digital untuk pendataan pinjaman yang responsif. Memudahkan admin dalam melacak status buku dan keanggotaan secara real-time.',
+              'Sistem manajemen buku digital untuk pendataan pinjaman yang responsif.',
               '#',
             )
           "
@@ -474,21 +478,93 @@
               margin-top: 15px;
               color: #ffd700;
               font-size: 14px;
+              font-weight: 600;
             "
-            >Detail Selengkapnya →</span
+            >Kunjungi Website →</span
           >
         </div>
 
         <div
           class="card"
-          style="opacity: 0.5"
           data-aos="fade-up"
           data-aos-delay="200"
+          onclick="
+            openProject(
+              'Premium Product Catalog',
+              'Katalog produk modern dengan tampilan mewah, menggunakan efek glassmorphism dan grid sistem yang elegan.',
+              'https://althafaariq.github.io/Katalog-Product/',
+            )
+          "
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">💎</div>
+          <h3>Product Catalog</h3>
+          <p style="color: #888; margin-top: 10px">
+            Katalog produk eksklusif dengan UI kelas atas.
+          </p>
+          <span
+            style="
+              display: inline-block;
+              margin-top: 15px;
+              color: #ffd700;
+              font-size: 14px;
+              font-weight: 600;
+            "
+            >Kunjungi Website →</span
+          >
+        </div>
+
+        <div
+          class="card"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          onclick="
+            openProject(
+              'Luxury Car Showroom',
+              'Aplikasi web katalog mobil sport dan mewah. Dilengkapi dengan visual cinematic dan layout dark-gold.',
+              'https://althafaariq.github.io/Catalog-Car/',
+            )
+          "
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">🏎️</div>
+          <h3>Car Catalog</h3>
+          <p style="color: #888; margin-top: 10px">
+            Showroom mobil digital dengan estetika spek dewa.
+          </p>
+          <span
+            style="
+              display: inline-block;
+              margin-top: 15px;
+              color: #ffd700;
+              font-size: 14px;
+              font-weight: 600;
+            "
+            >Kunjungi Website →</span
+          >
+        </div>
+
+        <div
+          class="card"
+          data-aos="fade-up"
+          data-aos-delay="400"
+          style="opacity: 0.6; cursor: default"
         >
           <div style="font-size: 40px; margin-bottom: 15px">🚀</div>
-          <h3>Coming Soon</h3>
-          <p style="color: #888; margin-top: 10px">
-            Proyek keren selanjutnya sedang dalam pengembangan.
+          <h3 style="color: #ffd700">Coming Soon</h3>
+          <p style="color: #555; margin-top: 10px">
+            Sesuatu yang luar biasa sedang dalam proses pengerjaan.
+          </p>
+        </div>
+
+        <div
+          class="card"
+          data-aos="fade-up"
+          data-aos-delay="500"
+          style="opacity: 0.6; cursor: default"
+        >
+          <div style="font-size: 40px; margin-bottom: 15px">⏳</div>
+          <h3 style="color: #ffd700">Coming Soon</h3>
+          <p style="color: #555; margin-top: 10px">
+            Project baru akan segera hadir. Tetaplah pantau!
           </p>
         </div>
       </div>
@@ -587,10 +663,8 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      // Inisialisasi AOS
       AOS.init({ duration: 1000, once: true });
 
-      // Typing Effect
       const text = ["Frontend Developer", "Creative Programmer", "UI Designer"];
       let i = 0,
         j = 0,
@@ -612,41 +686,30 @@
       }
       type();
 
-      // --- LOGIC GERAK TILT 3D ---
       const cards = document.querySelectorAll(".card");
-
       cards.forEach((card) => {
         card.addEventListener("mousemove", (e) => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // posisi x di dalam kartu
-          const y = e.clientY - rect.top; // posisi y di dalam kartu
-
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-
-          // Hitung derajat kemiringan (maksimal 15 derajat)
           const rotateX = (centerY - y) / 10;
           const rotateY = (x - centerX) / 10;
-
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
         });
-
         card.addEventListener("mouseleave", () => {
           card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
       });
 
-      // Modal Functionality
       const modal = document.getElementById("projectModal");
       function openProject(title, desc, link) {
         document.getElementById("modalTitle").innerText = title;
         document.getElementById("modalDescription").innerText = desc;
         document.getElementById("modalLink").href = link;
-        if (link === "#") {
-          document.getElementById("modalLink").style.display = "none";
-        } else {
-          document.getElementById("modalLink").style.display = "inline-block";
-        }
+        document.getElementById("modalLink").style.display =
+          link === "#" ? "none" : "inline-block";
         modal.style.display = "flex";
       }
 
